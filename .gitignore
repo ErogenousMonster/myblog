@@ -18,3 +18,4 @@ deploy_key_rsa
 fabfile.py
 _pycache_
 db.sqlite3
+whoosh_index
