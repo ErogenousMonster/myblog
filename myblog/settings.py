@@ -23,12 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'oe5ig6t_*7ak$uep++=e$b4g8dq=wkn^x6l@jb@jslr60gxc4%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# ALLOWED_HOSTS = []
+DEBUG = True
+ALLOWED_HOSTS = []
 
 
-DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.gorgeous-blog.top']
+# DEBUG = False
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.gorgeous-blog.top']
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogs',
     'comments',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -122,4 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# haystack setting
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'blogs.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
